@@ -64,14 +64,15 @@ def choice_char_class(char_name: str) -> Character:
     Возвращает строку с выбранным
     классом персонажа.
     """
-    # Добавили словарь, в котором соотносится ввод пользователя и класс персонажа.
+    # Добавили словарь, в котором соотносится ввод
+    # пользователя и класс персонажа.
     game_classes = {'warrior': Warrior,
                     'mage': Mage,
                     'healer': Healer
                     }
-    
-    approve_choice: str  = None
-    
+
+    approve_choice: str = None
+    print(f'Привет, {char_name}!')
     while approve_choice != 'y':
         selected_class = input('Введи название персонажа, '
                                'за которого хочешь играть: Воитель — warrior, '
@@ -91,9 +92,9 @@ def start_training(character):
     Возвращает сообщения о результатах цикла тренировки персонажа.
     """
     # Замените конструкцию условных операторов на словарь.
-    commands = {'attack': char_class.attack(),
-                'defence': defence.attack(),
-                'special': special.attack()
+    commands = {'attack': character.attack(),
+                'defence': character.defence(),
+                'special': character.special()
                 }
     print('Потренируйся управлять своими навыками.')
     print('Введи одну из команд: attack — чтобы атаковать противника, '
@@ -107,5 +108,10 @@ def start_training(character):
         # принадлежности введённой команды словарю.
         # В функции print() будет вызываться метод класса,
         # который соответствует введённой команде.
-        print(commands[cmd])
+        if cmd in commands:
+            print(commands[cmd])
     return 'Тренировка окончена.'
+
+
+start_training(choice_char_class(str(input('Введите Имя: '))))
+
